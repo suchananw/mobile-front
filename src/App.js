@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Login from './components/LogIn/login'
+
 class App extends Component {
   constructor() {
     super();
@@ -30,7 +31,7 @@ class App extends Component {
           ? <Login onRouteChange={this.onRouteChange} />
           : ( route === 'home'
               ? <div>
-                  { 'this is home page, you are logged in' }
+                  { `this is home page, ${user.username},  you are logged in` }
                 </div>
               : <div>
                   { '..under construction..' }
