@@ -48,7 +48,7 @@ export default class Login extends Component {
                   <form>
                     <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" />
                     <input type="email" placeholder="E-mail" required/>
-                    <p>birthday <DatePicker id="date" selected={this.state.birthday} onChange={this.handleChange} /></p>
+                    <div id='datePicker'><label className='birthday'>Birthday :</label><DatePicker id="date" selected={this.state.birthday} onChange={this.handleChange} /></div>
                     <input type="text" placeholder="Username" required/>
                     <input type="password"  placeholder="Password" required/>
                     <input type="password"  placeholder="Confirm Password" required/>
