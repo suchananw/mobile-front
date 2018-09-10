@@ -16,6 +16,16 @@ class App extends Component {
     }
   }
 
+  loadUser = (data) => {
+    this.setState(
+      {
+        user: {
+        username: data.username,
+        email: data.email
+      }
+    })
+  }
+
   onRouteChange = (route) => {
     if (route === 'home') {
       this.setState({isSignedIn: true})
@@ -28,7 +38,7 @@ class App extends Component {
     return (
       <div className="App">
         { route === 'signin' 
-          ? <Login onRouteChange={this.onRouteChange} />
+          ? <Login loadUser={this.loadUser} onRouteChange={this.onRouteChange} />
           : ( route === 'home'
               ? <div>
                   { `this is home page, ${user.username},  you are logged in` }

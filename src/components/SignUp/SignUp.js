@@ -36,7 +36,8 @@ export default class SignUp extends Component {
     this.setState({birthday: event.target.value})
   }
 
-  onSubmitSignUp = () => {
+  onSubmitSignUp = (e) => {
+    e.preventDefault();
     fetch('http://localhost:3000/signup', {
       method: 'post',
       headers: {'Content-Type': 'application/json'},
@@ -50,6 +51,7 @@ export default class SignUp extends Component {
       .then(response => response.json())
       .then(user => {
         if (user) {
+          this.props.loadUser(user)
           this.props.onChangeAction('signin');
         }
       })
@@ -58,14 +60,14 @@ export default class SignUp extends Component {
   render() {
     return (
       <div>
-        <form>
+        <form onSubmit = {this.onSubmitSignUp}>
           <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" />
           <input onChange={this.onEmailChange} type="email" placeholder="E-mail" required/>
           <div id='datePicker'><label className='birthday'>Birthday :</label><DatePicker id="date" onChange={this.onDateChange} selected={this.state.birthday} onChange={this.onDateChange} /></div>
           <input onChange={this.onUsernameChange} type="text" placeholder="Username" required/>
           <input onChange={this.onPasswordChange} type="password"  placeholder="Password" required/>
           <input type="password"  placeholder="Confirm Password" required/>
-          <input disabled={this.state.passwordNotMatch} onClick = {() => this.onSubmitSignUp} type="submit" value="Sign Up"/>
+          <input disabled={this.state.passwordNotMatch} type="submit" value="Sign Up"/>
         </form>
       </div>
     );

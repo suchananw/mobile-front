@@ -23,8 +23,8 @@ export default class Login extends Component {
           <h2 class={this.state.isActive==='signin'? "active" : "inactive underlineHover"} onClick = {() => this.onChangeAction('signin')}> Sign In </h2>
           <h2 class={this.state.isActive==='signup'? "active" : "inactive underlineHover"} onClick = {() => this.onChangeAction('signup')}>Sign Up </h2>
             { this.state.isActive === 'signin' 
-              ? <SignIn onRouteChange = {this.props.onRouteChange}/>
-              : <SignUp onChangeAction = {this.onChangeAction} />
+              ? <SignIn loadUser={this.props.loadUser} onRouteChange = {this.props.onRouteChange}/>
+              : <SignUp loadUser={this.props.loadUser} onChangeAction = {this.onChangeAction} />
             }
         </div>
       </div>
