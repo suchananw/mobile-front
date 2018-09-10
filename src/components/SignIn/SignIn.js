@@ -7,6 +7,7 @@ export default class SignIn extends Component {
       username: '',
       password: ''
     };
+
   } 
 
   onUsernameChange = (event) => {
@@ -17,10 +18,11 @@ export default class SignIn extends Component {
     this.setState({password: event.target.value})
   }
 
-  onSubmitSignIn = () => {
+  onSubmitSignIn = (e) => {
+    e.preventDefault();
     fetch('http://localhost:3000/signin', {
       method: 'post',
-      headers: {'Content-Type': 'application/json'},
+      headers: {'Content-type': 'application/json'},
       body: JSON.stringify({
         username: this.state.username,
         password: this.state.password,
@@ -29,6 +31,7 @@ export default class SignIn extends Component {
       .then(response => response.json())
       .then(user => {
         if (user.id) {
+          this.props.loadUser(user)
           this.props.onRouteChange('home');
         }
       })
@@ -37,11 +40,11 @@ export default class SignIn extends Component {
   render() {
     return (
       <div>
-        <form>
+        <form onSubmit={this.onSubmitSignIn}>
           <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" />
           <input onChange={this.onUsernameChange} type="text" placeholder="Username" required/>
           <input onChange={this.onPasswordChange} type="password"  placeholder="Password" required/>
-          <input onClick = {() => this.onSubmitSignIn} type="submit" value="Log In"/>
+          <input type="submit" value="Log In"/>
         </form>
         <div id="formFooter">
           <a onClick = {() => this.props.onRouteChange('forgetPassword')} class="underlineHover" href="#">Forgot Password?</a>
