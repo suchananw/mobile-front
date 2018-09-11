@@ -42,7 +42,7 @@ export default class SignIn extends Component {
       <div>
         <form onSubmit={this.onSubmitSignIn}>
           <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" />
-          <input onChange={this.onUsernameChange} type="text" placeholder="Username" required/>
+          <input onChange={this.onUsernameChange} type="email" placeholder="E-mail" required/>
           <input onChange={this.onPasswordChange} type="password"  placeholder="Password" required/>
           <input type="submit" value="Log In"/>
         </form>
