@@ -38,6 +38,7 @@ export default class SignUp extends Component {
 
   onSubmitSignUp = (e) => {
     e.preventDefault();
+    console.log(this.state.birthday)
     fetch('http://localhost:3000/signup', {
       method: 'post',
       headers: {'Content-Type': 'application/json'},
@@ -49,12 +50,7 @@ export default class SignUp extends Component {
       })
     })
       .then(response => response.json())
-      .then(user => {
-        if (user) {
-          this.props.loadUser(user)
-          this.props.onChangeAction('signin');
-        }
-      })
+      .then(this.props.onChangeAction('signin'))
   }
 
   render() {
