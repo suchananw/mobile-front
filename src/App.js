@@ -53,12 +53,12 @@ class App extends Component {
       <Route exact path = "/" render = {() =>  (
           <Login loadUser={this.loadUser} onRouteChange={this.onRouteChange} /> 
       )}/>
-      {/* <PrivateRoute path='/home' component={SearchPanel}/> */}
+      <PrivateRoute path='/home' component={SearchPanel}/>
 
-      <Route exact path="/home" render = {() => (
+      {/* <Route exact path="/home" render = {() => (
         this.state.isSignedIn? <SearchPanel/>
         : <Redirect to='/' />
-      )}/>
+      )}/> */}
       <Footer/>
       </div>
     );
