@@ -39,7 +39,7 @@ export default class SignUp extends Component {
   onSubmitSignUp = (e) => {
     e.preventDefault();
     console.log(this.state.birthday)
-    fetch('http://localhost:3000/signup', {
+    fetch('http://localhost:3001/signup', {
       method: 'post',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({

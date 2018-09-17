@@ -1,6 +1,8 @@
 import React, { Component } from "react";
+import {Route, Redirect,withRouter} from 'react-router-dom';
 
-export default class SignIn extends Component {
+
+class SignIn extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -20,7 +22,7 @@ export default class SignIn extends Component {
 
   onSubmitSignIn = (e) => {
     e.preventDefault();
-    fetch('http://localhost:3000/signin', {
+    fetch('http://localhost:3001/signin', {
       method: 'post',
       headers: {'Content-type': 'application/json'},
       body: JSON.stringify({
@@ -30,17 +32,19 @@ export default class SignIn extends Component {
     })
       .then(response => response.json())
       .then(user => {
+        console.log(user.id)
         if (user.id) {
           this.props.loadUser({
             isSignedIn : true,
             user : user
           })
-          this.props.onRouteChange('home');
+          //this.props.onRouteChange('home');
+          this.props.history.push('/home');
         }
       })
   }
 
-  render() {
+  render() { 
     return (
       <div>
         <form onSubmit={this.onSubmitSignIn}>
@@ -56,3 +60,5 @@ export default class SignIn extends Component {
     );
   }
 }
+
+export default withRouter(SignIn)
