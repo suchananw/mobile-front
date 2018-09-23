@@ -3,7 +3,7 @@ import './App.css';
 import Login from './components/LogIn/login';
 import Navbar from './components/Navbar/Navbar';
 import SearchPanel from './components/searchPanel/searchPanel';
-import {Router, Switch, Route,Redirect} from 'react-router-dom';
+import {Router, Switch, Route,Redirect,IndexRoute} from 'react-router-dom';
 import Footer from './components/Footer/Footer';
 class App extends Component {
   constructor() {

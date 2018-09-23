@@ -1,21 +1,48 @@
 import React, { Component } from 'react';
-import searchPanel from '../searchPanel/searchPanel';
-import {Link} from 'react-router-dom';
 import './footer.css';
 
-export default class Navbar extends Component {
-  constructor(props) {
-    super(props);
+var style = {
+      backgroundColor: "#F8F8F8",
+      borderTop: "1px solid #E7E7E7",
+      textAlign: "center",
+      padding: "20px",
+      position: "fixed",
+      left: "0",
+      bottom: "0",
+      height: "60px",
+      width: "100%",
+  }
+  
+  var phantom = {
+    display: 'block',
+    padding: '20px',
+    height: '60px',
+    width: '100%',
   }
 
-
-  render() {
+  function Footer({ children }) {
     return (
-        <footer>
-  <div class="container">
-    <p>Here Comes The Footer 2014 <a href=""> Copyright</a> and stuff</p>
-  </div>
-</footer>
-    );
+        <div>
+            <div style={phantom} />
+            <div style={style}>
+                { children }
+                <p>This is Footer</p>
+            </div>
+        </div>
+    )
   }
-}
+  export default Footer
+
+  // class Footer extends Component {
+
+  //   render() { 
+  //     return (
+  //       <div class="footer">
+  //         <p>Place sticky footer content here.</p>\
+  //     </div>
+    
+    
+  //     );
+  //   }
+  // }
+  // export default Footer
