@@ -33,13 +33,13 @@ export default class SignUp extends Component {
   }
 
   onDateChange = (event) => {
-    this.setState({birthday: event.target.value})
+    this.setState({birthday: event})
   }
 
   onSubmitSignUp = (e) => {
     e.preventDefault();
     console.log(this.state.birthday)
-    fetch('http://localhost:3000/signup', {
+    fetch('http://localhost:3001/signup', {
       method: 'post',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
@@ -59,7 +59,7 @@ export default class SignUp extends Component {
         <form onSubmit = {this.onSubmitSignUp}>
           <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" />
           <input onChange={this.onEmailChange} type="email" placeholder="E-mail" required/>
-          <div id='datePicker'><label className='birthday'>Birthday :</label><DatePicker id="date" onChange={this.onDateChange} selected={this.state.birthday} onChange={this.onDateChange} /></div>
+          <div id='datePicker'><label className='birthday'>Birthday</label><DatePicker id="date" onChange={this.onDateChange} selected={this.state.birthday} onChange={this.onDateChange} /></div>
           <input onChange={this.onUsernameChange} type="text" placeholder="Username" required/>
           <input onChange={this.onPasswordChange} type="password"  placeholder="Password" required/>
           <input type="password"  placeholder="Confirm Password" required/>
