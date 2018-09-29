@@ -5,6 +5,7 @@ import Navbar from './components/Navbar/Navbar';
 import SearchPanel from './components/searchPanel/searchPanel';
 import {Router, Switch, Route,Redirect,IndexRoute} from 'react-router-dom';
 import Footer from './components/Footer/Footer';
+import Home from './components/Home';
 class App extends Component {
   constructor() {
     super();
@@ -18,8 +19,6 @@ class App extends Component {
     }
   }
   
- 
-
   loadUser = (data) => {
     this.setState(
       {
@@ -31,10 +30,46 @@ class App extends Component {
     })
   }
 
+  resetToken = () => {
+    localStorage.removeItem('appToken'); //remove token from storage
+  }
+
   onRouteChange = (route) => {
     this.setState({route: route});
   }
 
+  loadUserFromToken = () => {
+    let token = localStorage.getItem('appToken');
+    if(!token || token === '') {//if there is no token, dont bother
+      return ;
+    }
+    //fetch user from token (if server deems it’s valid token)
+    fetch('http://localhost:3001/userToken', {
+      method: 'get',
+      headers: { 'Authorization': `Bearer ${token}`}
+    })
+      .then((response) => {
+        if (!response.error) {
+          //store token 
+          localStorage.setItem('appToken', response.token);
+          this.loadUser({
+            isSignedIn : true,
+            user : response.user
+          })
+        } else {
+          //remove token from storage
+          localStorage.removeItem('appToken');
+          this.loadUser({
+            isSignedIn : false,
+            user : {
+              username : '',
+              email : ''
+            }
+          })
+          return 'token expired'
+        }
+      });
+  }
 
   render() {
     const { isSignedIn, route, user } = this.state; 
@@ -48,17 +83,28 @@ class App extends Component {
     
     return (
       <div className="App">
-      <Navbar isSignedIn={isSignedIn} loadUser={this.loadUser} onRouteChange={this.onRouteChange} />
+      <Navbar isSignedIn={isSignedIn} resetToken={this.resetToken} loadUser={this.loadUser} onRouteChange={this.onRouteChange} />
 
       <Route exact path = "/" render = {() =>  (
-          <Login loadUser={this.loadUser} onRouteChange={this.onRouteChange} /> 
+          <Login loadUser={this.loadUser} onRouteChange={this.onRouteChange} />
       )}/>
-      <PrivateRoute path='/home' component={SearchPanel}/>
-
+      
+      {/* <PrivateRoute path='/home' component={SearchPanel}/> */}
+      <Route exact path = "/home" render = {() =>  (
+          <div>
+            <SearchPanel />
+            <Home />
+          </div>
+      )}/>
       {/* <Route exact path="/home" render = {() => (
-        this.state.isSignedIn? <SearchPanel/>
+        isSignedIn? 
+          <div>
+            <SearchPanel />
+            <Show />
+          </div>
         : <Redirect to='/' />
       )}/> */}
+
       <Footer/>
       </div>
     );

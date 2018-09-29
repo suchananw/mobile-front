@@ -19,7 +19,8 @@ export default class Navbar extends Component {
         username: '',
         email: ''
       }
-    })
+    });
+    this.props.resetToken();
     this.props.onRouteChange('signin');
   }
 

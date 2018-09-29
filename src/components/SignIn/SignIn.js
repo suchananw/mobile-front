@@ -31,17 +31,21 @@ class SignIn extends Component {
       })
     })
       .then(response => response.json())
-      .then(user => {
-        console.log(user.id)
-        if (user.id) {
+      .then(res => {
+        if (res.user.id) {
           this.props.loadUser({
             isSignedIn : true,
-            user : user
+            user : res.user
           })
+          this.storeToken(res.token)
           //this.props.onRouteChange('home');
           this.props.history.push('/home');
         }
       })
+  }
+
+  storeToken = (token) => {
+    localStorage.setItem('appToken', token);
   }
 
   render() { 

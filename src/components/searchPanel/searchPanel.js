@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-
+import './SearchPanel.css'
 
 export default class searchPanel extends Component {
 
   render() {
     return (
-<div class="container-fluid bg-light ">
-	<div class="row align-items-center justify-content-center">
+      <div class="container-fluid bg-light ">
+	      <div class="row align-items-center justify-content-center">
             	        <div class="col-md-2 pt-3">
                            <div class="form-group ">
                            <input class="form-control mr-sm-2" type="search" placeholder="Keyword" aria-label="Search" />
@@ -50,9 +50,7 @@ export default class searchPanel extends Component {
             	           <button type="button" class="btn btn-primary btn-block">Search</button>
             	        </div>
                 	</div>
-</div>
-
-
+        </div>
     );
   }
 }
