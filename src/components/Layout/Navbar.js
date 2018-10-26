@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
@@ -11,14 +10,12 @@ class Navbar extends Component {
   }
 
   render() {
-    const { isAuthenticated, user } = this.props.auth;
+    const { isAuthenticated } = this.props.auth;
 
     return (
       <div>
         <nav className="navbar navbar-expand-lg navbar-light bg-light px-4">
-          <Link className="navbar-brand" to="/">
-            CatStory
-          </Link>
+          <p className="navbar-brand">CatStory</p>
           <button
             className="navbar-toggler"
             type="button"
@@ -35,9 +32,9 @@ class Navbar extends Component {
             <ul className="navbar-nav mr-auto">
               <li className="nav-item active">
                 {/* <a className="nav-link" href="/home">Home <span className="sr-only">(current)</span></a> */}
-                <Link className="nav-link" to="/home">
+                <a className="nav-link" href="/home">
                   Home
-                </Link>
+                </a>
               </li>
               <li className="nav-item">
                 <a className="nav-link" href="#">

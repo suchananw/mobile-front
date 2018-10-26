@@ -5,6 +5,8 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { registerUser } from "../../actions/authActions";
 
+import "react-datepicker/dist/react-datepicker.css";
+
 class SignUp extends Component {
   constructor() {
     super();
@@ -64,6 +66,8 @@ class SignUp extends Component {
               <label className="birthday">Birthday</label>
               <DatePicker
                 id="date"
+                dateFormat="DD/MM/YYYY"
+                maxDate={moment().format("YYYY-MM-DD")}
                 onChange={this.onDateChange}
                 selected={this.state.birthday}
               />
