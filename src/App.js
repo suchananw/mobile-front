@@ -13,6 +13,7 @@ import Login from "./components/LogIn/Login";
 import Navbar from "./components/Layout/Navbar";
 import Footer from "./components/Layout/Footer";
 import Home from "./components/Home";
+import Search from "./components/Search/Search";
 
 // Check for token
 if (localStorage.jwtToken) {
@@ -42,6 +43,7 @@ class App extends Component {
             <Navbar />
             <Route exact path="/" component={Login} />
             <PrivateRoute exact path="/home" component={Home} />
+            <PrivateRoute exact path="/search" component={Search} />
             <Footer />
           </div>
         </Router>

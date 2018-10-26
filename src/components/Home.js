@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import SearchBar from "./SearchBar/SearchBar";
 import Show from "./Show/Show";
 
 const data = [
@@ -32,7 +31,6 @@ class Home extends Component {
   render() {
     return (
       <div class="container">
-        <SearchBar />
         <div class="row m-4">
           {data.map(prod => (
             <Show name={prod.name} price={prod.price} img={prod.img} />
