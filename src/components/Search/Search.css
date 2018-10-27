@@ -26,6 +26,9 @@ table tbody tr {
   height: 48px;
   border-bottom: 1px solid gray;
 }
+/* table thead tr th {
+  max-width: 400px;
+} */
 /* table tbody tr:last-child {
   border: 0;
 } */
@@ -51,6 +54,7 @@ table tbody tr {
   table td,
   table th {
     display: block;
+    min-width: 200px;
   }
   table thead {
     display: none;
@@ -73,30 +77,44 @@ table tbody tr {
     left: 10px;
     top: 0;
   }
-  table tbody tr td:nth-child(1):before {
+  /* table tbody tr td:nth-child(1):before {
+    content: "";
+  } */
+  table tbody tr td:nth-child(2):before {
     content: "NAME";
   }
-  table tbody tr td:nth-child(2):before {
+  table tbody tr td:nth-child(3):before {
     content: "BREED";
   }
-  table tbody tr td:nth-child(3):before {
+  table tbody tr td:nth-child(4):before {
     content: "GENDER";
   }
-  table tbody tr td:nth-child(4):before {
+  table tbody tr td:nth-child(5):before {
     content: "AGE";
   }
-  /* table tbody tr td:nth-child(5):before {
-    content: "AGE";
-  }
-  table tbody tr td:nth-child(6):before {
+  /* table tbody tr td:nth-child(6):before {
     content: "BREED";
   } */
 }
+@media screen and (min-width: 71.25em) {
+  .img-box {
+    width: 35%;
+    height: auto;
+    max-width: 500px;
+  }
+}
 
-img {
-  padding: 20px;
-  max-height: 180px;
-  max-width: 250px;
+.SearchBox {
+  margin: auto;
+  max-width: 500px;
+  min-width: 100px;
+}
+
+.search-img {
+  /* min-width: 120px; */
+  max-width: 280px;
+  width: 100%;
   left: 0px;
   right: 0px;
+  margin: 4px 0px;
 }

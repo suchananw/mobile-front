@@ -2,50 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-// import SearchBar from "./SearchBar/SearchBar";
+import { getCats } from "../../actions/shopActions";
 import "./Search.css";
-
-const data = [
-  {
-    name: "blah",
-    img: "https://i.ytimg.com/vi/YCaGYUIfdy4/maxresdefault.jpg",
-    age: "1",
-    breed: "booboooo",
-    gender: "female"
-  },
-  {
-    name: "blahblah",
-    img: "https://i.ytimg.com/vi/YCaGYUIfdy4/maxresdefault.jpg",
-    age: "1",
-    breed: "hello",
-    gender: "female"
-  },
-  {
-    name: "blahblahblah",
-    img: "https://i.ytimg.com/vi/YCaGYUIfdy4/maxresdefault.jpg",
-    age: "1",
-    breed: "hello",
-    gender: "male"
-  },
-  {
-    name: "blahblahblahblah",
-    img: "https://i.ytimg.com/vi/YCaGYUIfdy4/maxresdefault.jpg",
-    age: "1",
-    breed: "hello",
-    gender: "male"
-  }
-];
-
-class ProductCategoryRow extends Component {
-  render() {
-    const category = this.props.category;
-    return (
-      <tr>
-        <th colSpan="2">{category}</th>
-      </tr>
-    );
-  }
-}
 
 class ProductRow extends Component {
   render() {
@@ -54,9 +12,13 @@ class ProductRow extends Component {
     const breed = product.breed;
     const gender = product.gender;
     const age = product.age;
+    const img = product.img;
 
     return (
       <tr>
+        <td className="img-box">
+          <img className="search-img img-thumbnail" src={img} alt={name} />
+        </td>
         <td className="text-uppercase">{name}</td>
         <td>{breed}</td>
         <td>{gender}</td>
@@ -82,6 +44,7 @@ class ProductTable extends Component {
       <table>
         <thead>
           <tr>
+            <th />
             <th>Name</th>
             <th>Breed</th>
             <th>Gender</th>
@@ -101,19 +64,22 @@ class SearchBar extends Component {
 
   render() {
     return (
-      <form>
-        <input
-          type="text"
-          placeholder="Search..."
-          value={this.props.filterText}
-          onChange={this.handleFilterTextChange}
-        />
-      </form>
+      <div className="SearchBox">
+        <form>
+          <input
+            className="form-control p-4"
+            type="text"
+            placeholder="Search..."
+            value={this.props.filterText}
+            onChange={this.handleFilterTextChange}
+          />
+        </form>
+      </div>
     );
   }
 }
 
-class FilterableProductTable extends Component {
+class Search extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -123,6 +89,10 @@ class FilterableProductTable extends Component {
     this.handleFilterTextChange = this.handleFilterTextChange.bind(this);
   }
 
+  componentDidMount() {
+    this.props.getCats();
+  }
+
   handleFilterTextChange(filterText) {
     this.setState({
       filterText: filterText
@@ -130,57 +100,45 @@ class FilterableProductTable extends Component {
   }
 
   render() {
-    const data = [
-      {
-        name: "pithi",
-        img: "https://i.ytimg.com/vi/YCaGYUIfdy4/maxresdefault.jpg",
-        age: "1",
-        breed: "booboooo",
-        gender: "female"
-      },
-      {
-        name: "mana",
-        img: "https://i.ytimg.com/vi/YCaGYUIfdy4/maxresdefault.jpg",
-        age: "1",
-        breed: "hello",
-        gender: "female"
-      },
-      {
-        name: "lulu",
-        img: "https://i.ytimg.com/vi/YCaGYUIfdy4/maxresdefault.jpg",
-        age: "1",
-        breed: "hello",
-        gender: "male"
-      },
-      {
-        name: "manee",
-        img: "https://i.ytimg.com/vi/YCaGYUIfdy4/maxresdefault.jpg",
-        age: "1",
-        breed: "hello",
-        gender: "male"
-      }
-    ];
+    const { cats, loading } = this.props.cats;
 
-    return (
-      <div>
-        <SearchBar
-          filterText={this.state.filterText}
-          onFilterTextChange={this.handleFilterTextChange}
-        />
-        <ProductTable products={data} filterText={this.state.filterText} />
-      </div>
-    );
+    if (cats === null || loading) {
+      return (
+        <div>
+          <SearchBar
+            filterText={this.state.filterText}
+            onFilterTextChange={this.handleFilterTextChange}
+          />
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <SearchBar
+            filterText={this.state.filterText}
+            onFilterTextChange={this.handleFilterTextChange}
+          />
+          <ProductTable products={cats} filterText={this.state.filterText} />
+        </div>
+      );
+    }
   }
 }
 
-FilterableProductTable.propTypes = {
+Search.propTypes = {
+  getCats: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired
+  errors: PropTypes.object.isRequired,
+  cats: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  errors: state.errors
+  errors: state.errors,
+  cats: state.cats
 });
 
-export default connect(mapStateToProps)(withRouter(FilterableProductTable));
+export default connect(
+  mapStateToProps,
+  { getCats }
+)(withRouter(Search));

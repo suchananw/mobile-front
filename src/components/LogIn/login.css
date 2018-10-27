@@ -284,3 +284,7 @@ input[id="date"] {
 * {
   box-sizing: border-box;
 }
+
+.login-img {
+  width: auto;
+}

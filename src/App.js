@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
 import { setCurrentUser, logoutUser } from "./actions/authActions";
@@ -42,8 +42,12 @@ class App extends Component {
           <div className="App">
             <Navbar />
             <Route exact path="/" component={Login} />
-            <PrivateRoute exact path="/home" component={Home} />
-            <PrivateRoute exact path="/search" component={Search} />
+            <Switch>
+              <PrivateRoute exact path="/home" component={Home} />
+            </Switch>
+            <Switch>
+              <PrivateRoute exact path="/search" component={Search} />
+            </Switch>
             <Footer />
           </div>
         </Router>

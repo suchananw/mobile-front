@@ -13,11 +13,14 @@ class SignIn extends Component {
     };
   }
 
-  componentDidMount() {
-    if (this.props.auth.isAuthenticated) {
-      this.props.history.push("/home");
-    }
-  }
+  // componentDidMount() {
+  //   if (!this.props) {
+  //     window.location.href = "/home";
+  //   }
+  //   if (this.props.auth.isAuthenticated) {
+  //     this.props.history.push("/home");
+  //   }
+  // }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
@@ -47,7 +50,7 @@ class SignIn extends Component {
       <div>
         <form onSubmit={this.onSubmit} noValidate>
           <img
-            className="p-3"
+            className="login-img p-3"
             src="https://cdn.onlinewebfonts.com/svg/img_219849.png"
             id="icon"
             alt="User Icon"

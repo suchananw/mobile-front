@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 
@@ -37,24 +38,20 @@ class Navbar extends Component {
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="/search">
+                <Link className="nav-link" to="/search">
                   Search
-                </a>
+                </Link>
               </li>
             </ul>
             <div className="nav navbar-nav navbar-right0">
               {isAuthenticated ? (
-                <ul className="navbar-nav ml-auto">
-                  <li className="nav-item">
-                    <a
-                      href=""
-                      onClick={this.onLogoutClick.bind(this)}
-                      className="nav-link"
-                    >
-                      Logout
-                    </a>
-                  </li>
-                </ul>
+                <a
+                  href=""
+                  onClick={this.onLogoutClick.bind(this)}
+                  className="nav-link"
+                >
+                  Logout
+                </a>
               ) : (
                 <div />
               )}
